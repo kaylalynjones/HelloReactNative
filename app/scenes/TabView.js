@@ -5,7 +5,7 @@ import React, {
   StyleSheet,
   Text,
   View,
-  TabBarIOS
+  TabBarIOS,
 } from 'react-native';
 
 import WelcomeView from './WelcomeView';

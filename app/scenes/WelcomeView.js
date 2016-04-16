@@ -5,17 +5,20 @@ import React, {
   StyleSheet,
   Text,
   View,
+  TouchableWithoutFeedback,
 } from 'react-native';
 
+import dismissKeyboard from 'react-native-dismiss-keyboard';
 import LoginForm from '../components/LoginForm';
 
 export default class WelcomeView extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Hello React Native!</Text>
-        <LoginForm />
-      </View>
+      <TouchableWithoutFeedback onPress={dismissKeyboard}>
+        <View style={styles.container}>
+          <LoginForm />
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -27,9 +30,5 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     paddingTop: 60,
-  },
-  title: {
-    fontSize: 30,
-    alignSelf: 'center'
   },
 });

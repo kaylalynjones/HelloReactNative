@@ -3,87 +3,101 @@ import React, {
   AppRegistry,
   Component,
   StyleSheet,
-  Text,
-  TextInput,
-  TouchableHighlight,
   View,
+  Text,
 } from 'react-native';
+
+import Input from './Input';
+import Button from './Button';
 
 export default class LoginForm extends Component {
   constructor() {
     super();
     this.state = {
       email: null,
-      password: null
+      password: null,
+      gratitude: 'Thanks for stopping by!',
+      showGratitude: false,
     }
   }
+
+  renderForm() {
+    return (
+      <View>
+        <Input
+          autoFocus={true}
+          keyboardType='email-address'
+          label='Email'
+          value={this.state.email}
+          onChange={(text) => this.setState({email: text})}
+        />
+        <Input
+          secureTextEntry={true}
+          value={this.state.password}
+          label='Password'
+          onChange={(text) => this.setState({password: text})}
+        />
+        <Button onClick={() => {
+          this.setState({showGratitude: true})
+        }}/>
+      </View>
+    );
+  }
+
+  renderGratitude () {
+    return (
+        <View>
+          <Text style={styles.gratitude}>
+            {this.state.gratitude}
+          </Text>
+          <Text style={styles.attitude}>"Learn once, write anywhere."</Text>
+        </View>
+    );
+  }
   render() {
+    const { email, password, showGratitude } = this.state;
+
+    if (showGratitude && email && password) {
+      return (
+        <View style={styles.gratitudeWrapper}>
+          {this.renderGratitude()}
+        </View>
+      );
+    }
     return (
       <View style={styles.form}>
-        <Text>Email</Text>
-        <View style={styles.input}>
-          <TextInput
-            autoFocus={true}
-            placeholder='Email'
-            ref='Email'
-            placeholderTextColor='grey'
-            keyboardType='email-address'
-            keyboardAppearance='dark'
-            value={this.state.value}
-            onChangeText={(text) => this.setState({email: text})}
-          />
-        </View>
-        <Text>Password</Text>
-        <View style={styles.input}>
-          <TextInput
-            placeholder='Password'
-            ref='Password'
-            placeholderTextColor='grey'
-            secureTextEntry={true}
-            keyboardAppearance='dark'
-            value={this.state.value}
-            onChangeText={(text) => this.setState({password: text})}
-          />
-        </View>
-        <TouchableHighlight style={styles.button}>
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableHighlight>
+        <Text style={styles.title}>Hello React Native!</Text>
+        {this.renderForm()}
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 30,
+    marginBottom: 20,
+    alignSelf: 'center',
+  },
   form: {
     alignSelf: 'center',
-    marginTop: 40,
+    marginTop: 20,
   },
-  input: {
-    borderColor: '#DDDDDD',
-    borderWidth: 1,
-    width: 300,
-    height: 40,
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderRadius: 5,
-    marginTop: 3,
-    marginBottom: 10,
-    paddingLeft: 5,
-    paddingRight: 5
+  gratitudeWrapper: {
+    alignSelf: 'center',
   },
-  button: {
-    width: 100,
-    height: 40,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor:'steelblue',
-    backgroundColor: 'steelblue',
-    padding: 10,
-  },
-  buttonText: {
-    color:'#FFF',
-    fontSize: 20,
+  gratitude: {
+    fontSize: 30,
+    marginTop: 20,
+    color: 'steelblue',
+    fontWeight: 'bold',
     textAlign: 'center',
-    lineHeight: 20
+  },
+  attitude: {
+    fontSize: 25,
+    marginTop: 20,
+    color: 'steelblue',
+    fontWeight: '300',
+    textAlign: 'center',
   }
 });
