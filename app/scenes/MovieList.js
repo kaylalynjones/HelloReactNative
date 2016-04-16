@@ -55,9 +55,10 @@ export default class MovieList extends Component {
         <Image
         source={{uri: movie.posters.thumbnail}}
         style={styles.thumbnail}
+        resizeMode='cover'
         />
         <View style={styles.rightContainer}>
-          <Text>{movie.title}</Text>
+          <Text style={styles.title}>{movie.title}</Text>
           <Text>{movie.year}</Text>
         </View>
       </View>
@@ -85,11 +86,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5FCFF',
+    borderBottomWidth: 1,
+    borderBottomColor: '#EEEEEE',
+    borderStyle: 'solid',
   },
   thumbnail: {
-    width: 53,
-    height: 81
+    height: 80,
+    width: 80,
+    margin: 10
   },
   rightContainer: {
     flex: 1
@@ -97,10 +102,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     marginBottom: 8,
-    textAlign: 'center'
-  },
-  year: {
-    textAlign: 'center'
   },
   listView: {
     paddingTop: 20,

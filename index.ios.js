@@ -14,8 +14,8 @@ class HelloReactNative extends Component {
 
   render() {
     return (
-      <Navigator style={styles.bar}
-        initialRoute={{name: 'welcome'}}
+      <Navigator style={styles.container}
+        initialRoute={{name: 'tabs'}}
         renderScene={routeMapper}
       />
     );
@@ -23,10 +23,8 @@ class HelloReactNative extends Component {
 }
 
 const styles = StyleSheet.create({
-  bar: {
+  container: {
     flex: 1,
-    borderTopWidth: 20,
-    borderColor: 'black'
   }
 });
 
